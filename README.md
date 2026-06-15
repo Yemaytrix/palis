@@ -2,7 +2,7 @@
 
 **An independent compliance agent for clinical research, in Microsoft 365 Copilot.**
 
-Palis verifies whether the **people and AI agents on a clinical study were actually authorized to do what they did** — reconciling real study activity against the signed Delegation of Authority Log (DOAL) and credential timeline, and grounding every finding in cited regulation (21 CFR Part 11, HIPAA, GDPR). It is a Microsoft 365 Copilot **declarative agent** backed by an external **MCP server**, with regulatory citations grounded live in **Microsoft Foundry IQ**. Built for the **Enterprise Agents** track of the Microsoft Agents League.
+Palis verifies whether the **people and AI agents on a clinical study were actually authorized to do what they did** reconciling real study activity against the signed Delegation of Authority Log (DOAL) and credential timeline, and grounding every finding in cited regulation (21 CFR Part 11, HIPAA, GDPR). It is a Microsoft 365 Copilot **declarative agent** backed by an external **MCP server**, with regulatory citations grounded live in **Microsoft Foundry IQ**. Built for the **Enterprise Agents** track of the Microsoft Agents League.
 
 > ⚠️ **Synthetic demonstration.** All tenant, agent, study, staff, and patient data in this repository is fabricated. Palis is a **decision-support and evidence-preparation tool** — not a system of record and not a validated compliance system.
 
@@ -16,7 +16,7 @@ Palis verifies whether the **people and AI agents on a clinical study were actua
 
 On a clinical trial, a coordinator can perform informed consent *before* she is authorized on the delegation log — before the delegation is effective, or before the PI has signed it. The log looks valid today; the violation was in the **timing**, and it routinely goes uncaught until an audit, where it becomes a documented deviation.
 
-Tools that manage the DOAL as a *document* — store it, version it, e-sign it, send reminders — don't catch this, because they manage the log's current state, not whether each act was authorized at the moment it occurred. **That temporal reconciliation is the gap Palis fills:** it cross-checks the activity record against the authorization timeline and flags the task performed before delegation, the expired GCP certification, and the undelegated performer — each with the cited control it breaks. It can also gate a task *proactively*, before it happens.
+Tools that manage the DOAL as a *document*  store it, version it, e-sign it, send reminders — don't catch this, because they manage the log's current state, not whether each act was authorized at the moment it occurred. **That temporal reconciliation is the gap Palis fills:** it cross-checks the activity record against the authorization timeline and flags the task performed before delegation, the expired GCP certification, and the undelegated performer — each with the cited control it breaks. It can also gate a task *proactively*, before it happens.
 
 The same engine governs the other actor in the study: the **Copilot agents** handling that study's regulated data, scored for PHI handling against the same cited controls.
 
@@ -29,14 +29,14 @@ The same engine governs the other actor in the study: the **Copilot agents** han
 Palis is a declarative agent (Copilot provides the model and orchestration) that calls an external **MCP server** exposing **six tools**:
 
 **Agent-governance pipeline**
-1. `inventory_agents` — discover the Copilot agents in the tenant and the data each touches
-2. `evaluate_agent` — score one agent's regulated-data posture (deterministic, explainable rules → per-dimension scores → RED/AMBER/GREEN band)
-3. `map_to_controls` — translate each gap into a specific, *cited* regulatory control (grounded via Foundry IQ)
-4. `generate_attestation` — produce a control-by-control evidence pack, including an FDA-style Computer System Validation (CSV) draft (Document Control, Risk Register, URS/FS, Traceability Matrix, IQ/OQ/PQ drafts, Deviations, CAPA, Validation Conclusion)
+1. `inventory_agents` discover the Copilot agents in the tenant and the data each touches
+2. `evaluate_agent` score one agent's regulated-data posture (deterministic, explainable rules → per-dimension scores → RED/AMBER/GREEN band)
+3. `map_to_controls` translate each gap into a specific, *cited* regulatory control (grounded via Foundry IQ)
+4. `generate_attestation` produce a control-by-control evidence pack, including an FDA-style Computer System Validation (CSV) draft (Document Control, Risk Register, URS/FS, Traceability Matrix, IQ/OQ/PQ drafts, Deviations, CAPA, Validation Conclusion)
 
 **Credentialing & temporal authorization (the standout)**
-5. `reconcile_authorization` — reconcile study activity against the DOAL timeline; catch tasks performed before delegation/PI-signature, expired credentials, and undelegated performers; each finding cited
-6. `check_authorization` — proactive pre-task gate: confirm a staff member is on the current DOAL, PI-signed, in scope, and credentialed as of that date — preventing the deviation rather than documenting it
+5. `reconcile_authorization` reconcile study activity against the DOAL timeline; catch tasks performed before delegation/PI-signature, expired credentials, and undelegated performers; each finding cited
+6. `check_authorization` proactive pre-task gate: confirm a staff member is on the current DOAL, PI-signed, in scope, and credentialed as of that date  preventing the deviation rather than documenting it
 
 **Detection is deterministic, not an LLM judgment.** The reconciliation is date and credential logic — an auditor tool must be deterministic, and Palis never asks a model to *decide* whether an act was authorized. The model layer only **grounds** the cited regulation text.
 
