@@ -139,7 +139,7 @@ These are deliberately left as clearly-marked integration points rather than fak
 
 ## Honest scope
 
-Palis is **decision support and audit preparation — not certification, and not a system of record.** All demonstration data is synthetic. The grounded control set is focused (Part 11, HIPAA, GDPR special-category) rather than exhaustive, and the validation packages it produces are **drafts that flag the evidence still required**, not proof of a validated state. Production use against real data would require authenticated access (OAuth/Entra), a hardened and expanded regulatory corpus, and a formal security review.
+Palis is **decision support and audit preparation not certification, and not a system of record.** All demonstration data is synthetic. The grounded control set is focused (Part 11, HIPAA, GDPR special-category) rather than exhaustive, and the validation packages it produces are **drafts that flag the evidence still required**, not proof of a validated state. Production use against real data would require authenticated access (OAuth/Entra), a hardened and expanded regulatory corpus, and a formal security review.
 
 **IP note:** `reference_scorer.py` is a simplified, transparent reference implementation so the public repo is runnable and auditable. The production scoring methodology is proprietary and is **not** contained in this repository.
 
