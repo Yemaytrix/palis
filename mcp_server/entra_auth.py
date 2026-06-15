@@ -9,7 +9,7 @@ resource metadata and returns 401 + WWW-Authenticate, which is exactly what the
 Microsoft 365 Agents Toolkit's fetch expects.
 
 Required env vars (set before starting the server in authenticated mode):
-    ENTRA_TENANT_ID         your Ngozai tenant GUID (single-tenant)
+    ENTRA_TENANT_ID         your tenant GUID (single-tenant)
     ENTRA_CLIENT_ID         the Application (client) ID of the Palis MCP Server app reg
     ENTRA_APP_ID_URI        the Application ID URI, e.g. api://<client-id>
     PALIS_REQUIRE_AUTH      "true" to enforce auth (default false = open dev mode)
