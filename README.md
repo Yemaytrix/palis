@@ -14,9 +14,9 @@ Palis verifies whether the **people and AI agents on a clinical study were actua
 
 ## What problem this solves
 
-On a clinical trial, a coordinator can perform informed consent *before* she is authorized on the delegation log — before the delegation is effective, or before the PI has signed it. The log looks valid today; the violation was in the **timing**, and it routinely goes uncaught until an audit, where it becomes a documented deviation.
+On a clinical trial, a coordinator can perform informed consent *before* she is authorized on the delegation log before the delegation is effective, or before the PI has signed it. The log looks valid today; the violation was in the **timing**, and it routinely goes uncaught until an audit, where it becomes a documented deviation.
 
-Tools that manage the DOAL as a *document*  store it, version it, e-sign it, send reminders — don't catch this, because they manage the log's current state, not whether each act was authorized at the moment it occurred. **That temporal reconciliation is the gap Palis fills:** it cross-checks the activity record against the authorization timeline and flags the task performed before delegation, the expired GCP certification, and the undelegated performer — each with the cited control it breaks. It can also gate a task *proactively*, before it happens.
+Tools that manage the DOAL as a *document*  store it, version it, e-sign it, send reminders don't catch this, because they manage the log's current state, not whether each act was authorized at the moment it occurred. **That temporal reconciliation is the gap Palis fills:** it cross-checks the activity record against the authorization timeline and flags the task performed before delegation, the expired GCP certification, and the undelegated performer each with the cited control it breaks. It can also gate a task *proactively*, before it happens.
 
 The same engine governs the other actor in the study: the **Copilot agents** handling that study's regulated data, scored for PHI handling against the same cited controls.
 
@@ -38,9 +38,9 @@ Palis is a declarative agent (Copilot provides the model and orchestration) that
 5. `reconcile_authorization` reconcile study activity against the DOAL timeline; catch tasks performed before delegation/PI-signature, expired credentials, and undelegated performers; each finding cited
 6. `check_authorization` proactive pre-task gate: confirm a staff member is on the current DOAL, PI-signed, in scope, and credentialed as of that date  preventing the deviation rather than documenting it
 
-**Detection is deterministic, not an LLM judgment.** The reconciliation is date and credential logic — an auditor tool must be deterministic, and Palis never asks a model to *decide* whether an act was authorized. The model layer only **grounds** the cited regulation text.
+**Detection is deterministic, not an LLM judgment.** The reconciliation is date and credential logic an auditor tool must be deterministic, and Palis never asks a model to *decide* whether an act was authorized. The model layer only **grounds** the cited regulation text.
 
-**Safety rule enforced in code:** a gap is never reported without a grounded citation, the agent never labels anything "compliant" or "non-compliant" (only "gap — review required"), and evidence the tools don't return is marked as a placeholder rather than fabricated.
+**Safety rule enforced in code:** a gap is never reported without a grounded citation, the agent never labels anything "compliant" or "non-compliant" (only "gap review required"), and evidence the tools don't return is marked as a placeholder rather than fabricated.
 
 ### Microsoft technology (required components)
 
