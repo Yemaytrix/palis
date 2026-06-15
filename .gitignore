@@ -1,0 +1,43 @@
+# ── Secrets & environment (NEVER commit) ──────────────────────────────
+# Azure keys, OAuth client secrets, search admin/query keys live here.
+.env
+.env.*
+!.env.example
+*.env
+env/.env.dev
+env/.env.local
+env/.env.local.user
+**/local.settings.json
+*.key
+*.pem
+*.pfx
+secrets.json
+appsettings.local.json
+
+# ── Microsoft 365 Agents Toolkit local artifacts ──────────────────────
+# Toolkit writes tenant/app IDs and tokens into these — keep them local.
+.deployment/
+build/
+appPackage/build/
+.localConfigs
+m365agents.local.yml.user
+
+# ── Python ────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ── OS / editor ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# ── Local notes that should not ship ──────────────────────────────────
+# Put any file holding a real key/endpoint here; e.g. scratch credential notes.
+*.secret.md
+NOTES.local.md

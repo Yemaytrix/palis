@@ -1,0 +1,6 @@
+# Palis MCP server dependencies
+mcp>=1.2.0                      # Model Context Protocol Python SDK (FastMCP)
+# --- add on Day 3 / Day 5 ---
+# azure-identity                # Entra ID auth (OAuth token validation)
+# azure-monitor-opentelemetry   # OpenTelemetry -> Foundry portal traces
+# azure-search-documents        # Foundry IQ / Azure AI Search retrieval backend

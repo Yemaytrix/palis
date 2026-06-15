@@ -1,0 +1,35 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.4/schema.json",
+  "schema_version": "v2.4",
+  "name_for_human": "Palis",
+  "description_for_human": "Clinical-research compliance: reconcile staff authorization timing, evaluate Copilot agents for regulated-data governance, and map gaps to cited controls.",
+  "description_for_model": "Palis provides clinical-research compliance tools. reconcile_authorization checks what study staff actually DID against what they were AUTHORIZED to do at the time, catching tasks performed before delegation was effective or PI-signed, expired GCP certifications, and undelegated performers. check_authorization is a pre-task gate. inventory_agents, evaluate_agent, map_to_controls, and generate_attestation inventory and score Microsoft 365 Copilot agents for PHI and clinical-study-record governance and translate gaps into specific cited regulatory controls (21 CFR Part 11, HIPAA, ICH-GCP, GDPR). Use these tools for any clinical-research compliance, authorization-timing, PHI-handling, audit-readiness, or agent-governance request. Never assert a requirement without a grounded citation; describe findings as 'gap - review required', not 'non-compliant'.",
+  "namespace": "palis",
+  "functions": [
+    { "name": "inventory_agents", "description": "List the Microsoft 365 Copilot agents in the tenant and the data each one touches." },
+    { "name": "evaluate_agent", "description": "Score one agent's regulated-data governance posture and return the gaps. Requires agent_id." },
+    { "name": "map_to_controls", "description": "Translate an agent's gaps into specific cited regulatory controls. Requires agent_id." },
+    { "name": "generate_attestation", "description": "Produce an IRB/FDA-style control-by-control evidence pack for an agent. Requires agent_id." },
+    { "name": "reconcile_authorization", "description": "Reconcile what study staff actually did against the signed delegation log and credential timeline; catches tasks performed before delegation was effective, expired certifications, and undelegated performers." },
+    { "name": "check_authorization", "description": "Pre-task authorization gate: confirm a staff member is authorized to perform a task on a given date before they act." }
+  ],
+  "runtimes": [
+    {
+      "type": "RemoteMCPServer",
+      "spec": {
+        "url": "https://REPLACE-WITH-CURRENT-TUNNEL-8000.usw3.devtunnels.ms/mcp",
+        "mcp_tool_description": {
+          "tools": [
+            { "name": "inventory_agents", "description": "List the Microsoft 365 Copilot agents in the tenant and the data each one touches.", "inputSchema": { "type": "object", "properties": {}, "required": [] } },
+            { "name": "evaluate_agent", "description": "Score one agent's regulated-data governance posture and return the gaps.", "inputSchema": { "type": "object", "properties": { "agent_id": { "type": "string", "description": "The agent identifier, e.g. AGT-NB-002." } }, "required": ["agent_id"] } },
+            { "name": "map_to_controls", "description": "Translate an agent's gaps into specific cited regulatory controls.", "inputSchema": { "type": "object", "properties": { "agent_id": { "type": "string", "description": "The agent identifier." } }, "required": ["agent_id"] } },
+            { "name": "generate_attestation", "description": "Produce an IRB/FDA-style control-by-control evidence pack for an agent.", "inputSchema": { "type": "object", "properties": { "agent_id": { "type": "string", "description": "The agent identifier." } }, "required": ["agent_id"] } },
+            { "name": "reconcile_authorization", "description": "Reconcile staff activity against the signed delegation log and credential timeline.", "inputSchema": { "type": "object", "properties": { "study_id": { "type": "string", "description": "The study identifier, e.g. STUDY-NB-2026-014." } }, "required": [] } },
+            { "name": "check_authorization", "description": "Pre-task authorization gate for a staff member, task, and date.", "inputSchema": { "type": "object", "properties": { "staff_id": { "type": "string", "description": "Staff identifier." }, "task": { "type": "string", "description": "The task to be performed." }, "proposed_date": { "type": "string", "description": "ISO date the task would be performed." }, "study_id": { "type": "string", "description": "The study identifier." } }, "required": ["staff_id", "task", "proposed_date"] } }
+          ]
+        }
+      },
+      "run_for_functions": ["inventory_agents", "evaluate_agent", "map_to_controls", "generate_attestation", "reconcile_authorization", "check_authorization"]
+    }
+  ]
+}

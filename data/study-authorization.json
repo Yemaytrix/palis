@@ -1,0 +1,66 @@
+{
+  "_disclaimer": "SYNTHETIC DEMONSTRATION DATA ONLY. No real people, studies, or participants. All identifiers fabricated for the Palis demo. Dates and gaps are engineered to illustrate temporal authorization failures.",
+  "study": "STUDY-NB-2026-014",
+  "study_start": "2026-01-01",
+  "study_end": "2027-06-30",
+  "doal": [
+    {
+      "staff_id": "CRC-1102",
+      "role": "Clinical Research Coordinator",
+      "delegated_tasks": ["informed_consent", "data_entry"],
+      "delegation_effective": "2026-03-20",
+      "pi_signature_date": "2026-03-22",
+      "credentials": { "license": "CRC", "gcp_cert_expiry": "2027-01-15" }
+    },
+    {
+      "staff_id": "RN-2041",
+      "role": "Research Nurse",
+      "delegated_tasks": ["drug_administration", "vitals"],
+      "delegation_effective": "2026-01-10",
+      "pi_signature_date": "2026-01-10",
+      "credentials": { "license": "RN", "gcp_cert_expiry": "2026-02-01" }
+    },
+    {
+      "staff_id": "CRC-1108",
+      "role": "Clinical Research Coordinator",
+      "delegated_tasks": ["data_entry", "informed_consent"],
+      "delegation_effective": "2026-01-05",
+      "pi_signature_date": "2026-01-05",
+      "credentials": { "license": "CRC", "gcp_cert_expiry": "2027-08-01" }
+    }
+  ],
+  "activity_log": [
+    {
+      "event_id": "EV-001",
+      "task": "informed_consent",
+      "performed_by": "CRC-1102",
+      "date": "2026-03-14",
+      "subject": "SUBJ-0007",
+      "_expected_finding": "Consent performed before delegation effective (03-20) and before PI signature (03-22) — the witnessed failure."
+    },
+    {
+      "event_id": "EV-002",
+      "task": "drug_administration",
+      "performed_by": "RN-2041",
+      "date": "2026-03-01",
+      "subject": "SUBJ-0007",
+      "_expected_finding": "Performed under an expired GCP certification (expired 2026-02-01)."
+    },
+    {
+      "event_id": "EV-003",
+      "task": "phlebotomy",
+      "performed_by": "MA-0455",
+      "date": "2026-02-15",
+      "subject": "SUBJ-0003",
+      "_expected_finding": "Performer not on the DOAL at all — undelegated task."
+    },
+    {
+      "event_id": "EV-004",
+      "task": "data_entry",
+      "performed_by": "CRC-1108",
+      "date": "2026-02-01",
+      "subject": "SUBJ-0002",
+      "_expected_finding": "Clean — delegated, PI-signed, in scope, valid credentials, after authorization."
+    }
+  ]
+}

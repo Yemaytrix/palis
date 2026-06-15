@@ -1,0 +1,101 @@
+{
+  "_disclaimer": "SYNTHETIC DEMONSTRATION DATA ONLY. No real patients, staff, studies, PHI, or tenant data. All identifiers (AGT-NB-*, SRC-NB-*, STUDY-NB-*) are fabricated. Created solely for the Microsoft Agents League hackathon demo.",
+  "tenant": "NorthBay Health Network (synthetic)",
+  "generated_for": "Palis clinical-research compliance translator demo",
+  "agents": [
+    {
+      "id": "AGT-NB-001",
+      "name": "PatientIntake Assistant",
+      "purpose": "Helps front-desk staff summarize incoming patient demographics and history.",
+      "builder": "Copilot Studio",
+      "data_sources": [
+        { "id": "SRC-NB-PHI-01", "name": "Patient Demographics (SharePoint)", "contains_phi": true, "reidentifiable": true, "classification": "confidential" }
+      ],
+      "access": { "audience": "all_staff", "scope": "tenant" },
+      "controls": { "audit_trail": true, "classification_labels": true, "deidentification": false, "access_restriction": false, "esignature": false },
+      "_expected_band": "RED",
+      "_expected_primary_gap": "Broad PHI access violates HIPAA minimum-necessary (164.502(b)) and access control (164.312(a))."
+    },
+    {
+      "id": "AGT-NB-002",
+      "name": "ClinicalTrialCoordinator Agent",
+      "purpose": "Assists CRCs with protocol lookups and updates to study task records.",
+      "builder": "Custom Engine Agent",
+      "study": "STUDY-NB-2026-014",
+      "data_sources": [
+        { "id": "SRC-NB-STUDY-01", "name": "Study Task & DOA Records (SharePoint list)", "contains_phi": true, "reidentifiable": true, "classification": "confidential" }
+      ],
+      "access": { "audience": "study_team", "scope": "group" },
+      "controls": { "audit_trail": false, "classification_labels": true, "deidentification": false, "access_restriction": true, "esignature": false },
+      "_expected_band": "RED",
+      "_expected_primary_gap": "No secure, time-stamped audit trail of record changes violates 21 CFR 11.10(e) and HIPAA 164.312(b)."
+    },
+    {
+      "id": "AGT-NB-003",
+      "name": "ResearchData Explorer",
+      "purpose": "Lets researchers query datasets described as de-identified for cohort analysis.",
+      "builder": "Copilot Studio",
+      "study": "STUDY-NB-2026-014",
+      "data_sources": [
+        { "id": "SRC-NB-DEID-01", "name": "Research Cohort Dataset (claims to be de-identified)", "contains_phi": true, "reidentifiable": true, "classification": "internal" }
+      ],
+      "access": { "audience": "study_team", "scope": "group" },
+      "controls": { "audit_trail": true, "classification_labels": true, "deidentification": false, "access_restriction": true, "esignature": false },
+      "_expected_band": "RED",
+      "_expected_primary_gap": "Re-identifiable source treated as de-identified without a de-identification control: HIPAA + GDPR Art. 9 special-category risk."
+    },
+    {
+      "id": "AGT-NB-004",
+      "name": "LabResults Helper",
+      "purpose": "Summarizes lab result documents for clinicians.",
+      "builder": "Declarative Agent",
+      "data_sources": [
+        { "id": "SRC-NB-LAB-01", "name": "Lab Results Library (SharePoint)", "contains_phi": true, "reidentifiable": true, "classification": "unlabeled" }
+      ],
+      "access": { "audience": "care_team", "scope": "group" },
+      "controls": { "audit_trail": true, "classification_labels": false, "deidentification": false, "access_restriction": true, "esignature": false },
+      "_expected_band": "RED",
+      "_expected_primary_gap": "Unclassified PHI source means data-handling controls cannot be enforced or proven (classification coverage gap)."
+    },
+    {
+      "id": "AGT-NB-005",
+      "name": "Pharmacovigilance Assistant",
+      "purpose": "Helps safety staff triage adverse-event reports.",
+      "builder": "Custom Engine Agent",
+      "study": "STUDY-NB-2026-014",
+      "data_sources": [
+        { "id": "SRC-NB-AE-01", "name": "Adverse Event Reports", "contains_phi": true, "reidentifiable": false, "classification": "confidential" }
+      ],
+      "access": { "audience": "study_team", "scope": "group" },
+      "controls": { "audit_trail": true, "classification_labels": true, "deidentification": true, "access_restriction": true, "esignature": false },
+      "_expected_band": "AMBER",
+      "_expected_primary_gap": "Records that may carry signatures lack an e-signature control (21 CFR 11.50/11.100) — partial posture, review recommended."
+    },
+    {
+      "id": "AGT-NB-006",
+      "name": "HRBenefits Helper",
+      "purpose": "Answers employee benefits questions.",
+      "builder": "Declarative Agent",
+      "data_sources": [
+        { "id": "SRC-NB-HR-01", "name": "Benefits FAQ (SharePoint)", "contains_phi": false, "reidentifiable": false, "classification": "internal" }
+      ],
+      "access": { "audience": "all_staff", "scope": "tenant" },
+      "controls": { "audit_trail": true, "classification_labels": true, "deidentification": true, "access_restriction": false, "esignature": false },
+      "_expected_band": "GREEN",
+      "_expected_primary_gap": "No regulated data in scope; broad access acceptable for non-PHI FAQ content."
+    },
+    {
+      "id": "AGT-NB-007",
+      "name": "ITHelpdesk Agent",
+      "purpose": "Handles internal IT tickets.",
+      "builder": "Declarative Agent",
+      "data_sources": [
+        { "id": "SRC-NB-IT-01", "name": "IT Knowledge Base", "contains_phi": false, "reidentifiable": false, "classification": "internal" }
+      ],
+      "access": { "audience": "all_staff", "scope": "tenant" },
+      "controls": { "audit_trail": true, "classification_labels": true, "deidentification": true, "access_restriction": false, "esignature": false },
+      "_expected_band": "GREEN",
+      "_expected_primary_gap": "No regulated data in scope."
+    }
+  ]
+}

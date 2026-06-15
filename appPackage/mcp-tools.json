@@ -1,0 +1,115 @@
+{
+  "_comment": "Local copy of the Palis MCP server's tool definitions. Per the Microsoft 365 Agents Toolkit CLI, an mcp-tools file is REQUIRED when the MCP server needs authentication (Palis uses OAuth 2.0 / Entra ID). The toolkit can also fetch/regenerate this from the server's tools/list. Structure mirrors the reference build (JSON Schema draft-07 inputSchema, additionalProperties:false).",
+  "tools": [
+    {
+      "name": "inventory_agents",
+      "description": "List the Microsoft 365 Copilot agents in the tenant and the data each one touches. Use first; you cannot govern what you cannot see.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "evaluate_agent",
+      "description": "Score one agent's regulated-data governance posture and return the gaps (deterministic rules -> per-dimension scores -> RED/AMBER/GREEN band).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Agent id, e.g. 'AGT-NB-002'."
+          },
+          "includeRegulatoryContext": {
+            "type": "boolean",
+            "description": "If true, include the regulatory framework context alongside each gap."
+          }
+        },
+        "required": ["agentId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "map_to_controls",
+      "description": "Translate an agent's gaps into specific, cited regulatory controls (21 CFR Part 11, HIPAA, ICH-GCP, GDPR), each grounded via Foundry IQ. A gap is never returned without a grounded citation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Agent id, e.g. 'AGT-NB-002'."
+          }
+        },
+        "required": ["agentId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_attestation",
+      "description": "Return a presentation-ready, control-by-control compliance evidence bundle for an agent, in the format an IRB or FDA reviewer expects. Renders as an MCP App card.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Agent id, e.g. 'AGT-NB-002'."
+          },
+          "includeRemediation": {
+            "type": "boolean",
+            "description": "If true, include suggested remediation language for each gap."
+          }
+        },
+        "required": ["agentId"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "reconcile_authorization",
+      "description": "Reconcile study activity against the Delegation of Authority Log timeline. Catches tasks performed before delegation was effective or PI-signed, expired GCP certifications, and undelegated performers - the temporal failures a valid-looking DOAL hides. Each finding includes a cited control and an auto-drafted deviation note.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "studyId": {
+            "type": "string",
+            "description": "Study id, e.g. 'STUDY-NB-2026-014'."
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "check_authorization",
+      "description": "Proactive pre-task gate. Before a staff member performs a task, check whether they are on the current DOAL, PI-signed, in delegated scope, and credentialed as of the proposed date. Returns authorized true/false with specific reasons, to prevent a deviation rather than document it after the fact.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "staffId": {
+            "type": "string",
+            "description": "Staff member id, e.g. 'CRC-1102'."
+          },
+          "task": {
+            "type": "string",
+            "description": "Task to be performed, e.g. 'informed_consent'."
+          },
+          "proposedDate": {
+            "type": "string",
+            "description": "Proposed date of the task, ISO format YYYY-MM-DD."
+          },
+          "studyId": {
+            "type": "string",
+            "description": "Study id, e.g. 'STUDY-NB-2026-014'."
+          }
+        },
+        "required": ["staffId", "task", "proposedDate"],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

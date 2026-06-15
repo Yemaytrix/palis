@@ -1,0 +1,84 @@
+<svg viewBox="0 0 1280 820" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1280" height="820" fill="#0f1320"/>
+
+  <!-- Title -->
+  <text x="48" y="56" fill="#ffffff" font-size="28" font-weight="700">Palis — Architecture</text>
+  <text x="48" y="86" fill="#8aa0c0" font-size="14">Independent AI-governance + authorization reconciliation for clinical research, on Microsoft 365 Copilot and Foundry IQ</text>
+
+  <!-- Pillar badges -->
+  <rect x="980" y="34" width="148" height="30" rx="15" fill="#1f6feb"/>
+  <text x="1054" y="54" fill="#ffffff" font-size="13" font-weight="600" text-anchor="middle">M365 Copilot</text>
+  <rect x="1140" y="34" width="120" height="30" rx="15" fill="#7c3aed"/>
+  <text x="1200" y="54" fill="#ffffff" font-size="13" font-weight="600" text-anchor="middle">Foundry IQ</text>
+
+  <!-- arrow marker -->
+  <defs><marker id="a" markerWidth="11" markerHeight="11" refX="8" refY="3.2" orient="auto"><path d="M0,0 L8,3.2 L0,6.4 Z" fill="#5b7bb4"/></marker></defs>
+
+  <!-- 1. User -->
+  <rect x="48" y="180" width="200" height="120" rx="12" fill="#161b2e" stroke="#2a3450"/>
+  <text x="148" y="228" fill="#ffffff" font-size="16" font-weight="600" text-anchor="middle">Compliance user</text>
+  <text x="148" y="258" fill="#8aa0c0" font-size="12.5" text-anchor="middle">asks in natural</text>
+  <text x="148" y="278" fill="#8aa0c0" font-size="12.5" text-anchor="middle">language</text>
+
+  <!-- 2. M365 Copilot Declarative Agent -->
+  <rect x="296" y="158" width="296" height="186" rx="12" fill="#13233f" stroke="#1f6feb"/>
+  <text x="444" y="196" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">M365 Copilot</text>
+  <text x="444" y="220" fill="#ffffff" font-size="13" text-anchor="middle">Declarative Agent "Palis"</text>
+  <text x="444" y="262" fill="#8aa0c0" font-size="12" text-anchor="middle">declarativeAgent.json + instruction.txt</text>
+  <text x="444" y="288" fill="#8aa0c0" font-size="12" text-anchor="middle">ai-plugin.json action:</text>
+  <text x="444" y="314" fill="#9ecbff" font-size="12.5" font-weight="600" text-anchor="middle">type = RemoteMCPServer</text>
+
+  <!-- 3. Dev tunnel -->
+  <rect x="640" y="206" width="148" height="92" rx="12" fill="#161b2e" stroke="#2a3450"/>
+  <text x="714" y="244" fill="#ffffff" font-size="14" font-weight="600" text-anchor="middle">Dev Tunnel</text>
+  <text x="714" y="268" fill="#8aa0c0" font-size="11.5" text-anchor="middle">streamable-HTTP</text>
+  <text x="714" y="286" fill="#8aa0c0" font-size="11.5" text-anchor="middle">/mcp</text>
+
+  <!-- 4. MCP Server -->
+  <rect x="836" y="150" width="408" height="214" rx="12" fill="#161b2e" stroke="#2a3450"/>
+  <text x="1040" y="188" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">External MCP Server (Python / FastMCP)</text>
+  <text x="1040" y="212" fill="#8aa0c0" font-size="12" text-anchor="middle">Deterministic authorization + control engine</text>
+  <g font-size="11.5" fill="#cfe0ff">
+    <rect x="856" y="234" width="186" height="28" rx="14" fill="#22304f"/><text x="949" y="252" text-anchor="middle">reconcile_authorization</text>
+    <rect x="1056" y="234" width="168" height="28" rx="14" fill="#22304f"/><text x="1140" y="252" text-anchor="middle">check_authorization</text>
+    <rect x="856" y="274" width="150" height="28" rx="14" fill="#22304f"/><text x="931" y="292" text-anchor="middle">inventory_agents</text>
+    <rect x="1020" y="274" width="140" height="28" rx="14" fill="#22304f"/><text x="1090" y="292" text-anchor="middle">evaluate_agent</text>
+    <rect x="856" y="314" width="148" height="28" rx="14" fill="#22304f"/><text x="930" y="332" text-anchor="middle">map_to_controls</text>
+    <rect x="1018" y="314" width="184" height="28" rx="14" fill="#22304f"/><text x="1110" y="332" text-anchor="middle">generate_attestation</text>
+  </g>
+
+  <!-- 5. Foundry IQ -->
+  <rect x="836" y="438" width="408" height="172" rx="12" fill="#1c1733" stroke="#7c3aed"/>
+  <text x="1040" y="478" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">Microsoft Foundry IQ</text>
+  <text x="1040" y="508" fill="#c9b8ff" font-size="12.5" text-anchor="middle">Azure AI Search — EXTRACTIVE retrieval</text>
+  <text x="1040" y="536" fill="#8aa0c0" font-size="12" text-anchor="middle">Regulatory corpus: 21 CFR Part 11, HIPAA, GDPR</text>
+  <text x="1040" y="562" fill="#8aa0c0" font-size="12" text-anchor="middle">Returns cited controls + grounded requirements</text>
+  <text x="1040" y="586" fill="#6f7f9c" font-size="11.5" text-anchor="middle">(no generative LLM in the grounding path)</text>
+
+  <!-- 6. Outputs -->
+  <rect x="296" y="438" width="408" height="172" rx="12" fill="#161b2e" stroke="#2a3450"/>
+  <text x="500" y="478" fill="#ffffff" font-size="16" font-weight="700" text-anchor="middle">Grounded outputs (in Copilot Chat)</text>
+  <text x="500" y="510" fill="#8aa0c0" font-size="12.5" text-anchor="middle">Reconciliation findings · agent scorecards</text>
+  <text x="500" y="536" fill="#8aa0c0" font-size="12.5" text-anchor="middle">Control mapping · FDA-style CSV validation draft</text>
+  <text x="500" y="570" fill="#7fd1a6" font-size="12" font-weight="600" text-anchor="middle">grounded-only · "gap — review required" · synthetic data</text>
+
+  <!-- arrows -->
+  <g stroke="#5b7bb4" stroke-width="2.2" fill="none" marker-end="url(#a)">
+    <line x1="248" y1="240" x2="292" y2="240"/>
+    <line x1="592" y1="250" x2="636" y2="250"/>
+    <line x1="788" y1="250" x2="832" y2="250"/>
+    <line x1="1040" y1="366" x2="1040" y2="434"/>
+    <line x1="834" y1="510" x2="708" y2="510"/>
+    <line x1="500" y1="436" x2="500" y2="348"/>
+  </g>
+  <text x="714" y="192" fill="#9ecbff" font-size="11" text-anchor="middle">tool call</text>
+  <text x="1052" y="404" fill="#c9b8ff" font-size="11">grounding query</text>
+
+  <!-- footer -->
+  <rect x="48" y="660" width="1196" height="132" rx="10" fill="#11162a" stroke="#222b45"/>
+  <text x="70" y="694" fill="#ffffff" font-size="14" font-weight="600">Two Microsoft pillars</text>
+  <text x="70" y="718" fill="#8aa0c0" font-size="12.5">M365 Copilot = the conversational surface and tool-calling host.   Foundry IQ = the live regulatory grounding.</text>
+  <text x="70" y="748" fill="#ffffff" font-size="14" font-weight="600">Auth</text>
+  <text x="128" y="748" fill="#8aa0c0" font-size="12.5">Anonymous MCP connection (demonstrated).   Microsoft Entra ID OAuth 2.0 = roadmap for authenticated production access.</text>
+  <text x="70" y="776" fill="#7fd1a6" font-size="12.5">Decision support, not certification.   Synthetic demonstration data only.   Public repo ships a reference scorer; production methodology is proprietary.</text>
+</svg>
